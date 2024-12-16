@@ -4,7 +4,7 @@ import glob
 from google.oauth2.service_account import Credentials
 import gspread
 
-class Frov(): 
+class Auchan_frov(): 
     def __init__(self):
         pass
 
@@ -94,22 +94,32 @@ class Frov():
 
        
         df = pd.DataFrame()  
+        mass_quantily = []
         for [key, val] in self.settings.items():
             file_path = f'C:/Project/Auchan/{key}'
             if os.path.exists(file_path):
                 os.remove(file_path)
             else:
+               
                 df = pd.concat([df, self.file_formation(key, val)]) 
                 df.to_excel(f'C:/Project/Auchan/for_import/{key}', index =False)
-                print(val['mess'], len(df[df['Название корзины'] == val['add']['Название корзины']]))
+                quantily = len(df[df['Название корзины'] == val['add']['Название корзины']])
+                mass_quantily.append(f'{val["mess"]} {quantily}')
+        print("Формирование файлов завершена")
+
+
+        return mass_quantily
 
     def file_formation(self, filename, settings_file):
-        print(glob.glob('ТЗ_ДЕКАБРЬ 2024_МА'))
-        file = pd.read_excel(f'C:/Project/Auchan/tz/{os.listdir(self.dir_path)[0]}', sheet_name = settings_file['sheet_name'], header = 0)
+
+        file = pd.read_excel(glob.glob('C:/Project/Auchan/tz/ТЗ_*')[0], sheet_name = settings_file['sheet_name'], header = 0)
         file.rename(columns=settings_file['columns'], inplace=True)
         file = self.new_column(file, settings_file['add'])
+        # Забираем все Артикул Метро из словаря tov_szt и вставляем в одноименный столбец стобец 
         if (filename == 'frov_szt.xlsx'):
-            file.loc[:,'Артикул Метро']=[2,11,26,37,34,36,18,15,100021,3,100019,100010,100020,12,100014,17,25,100015,19,100016,100018,100017,109844]
+            df_tov_szt = pd.read_excel(r'C:\Project\Auchan\tz\tov_szt.xlsx')
+            result_dict = df_tov_szt.set_index('Название артикула')['Артикул Метро'].to_dict()
+            file['Артикул Метро'] = file['Название артикула'].map(result_dict)
         return file
 
     def new_column(self, filepd, add):

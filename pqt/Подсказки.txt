@@ -1,1 +1,2 @@
 pyinstaller app.spec - запустить сборку
+pyuic6 pqt/design.ui -o pqt/design.py

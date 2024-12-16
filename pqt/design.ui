@@ -6,26 +6,184 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>153</width>
-    <height>92</height>
+    <width>1077</width>
+    <height>737</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>0</x>
       <y>10</y>
-      <width>93</width>
-      <height>28</height>
+      <width>1071</width>
+      <height>681</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Frov</string>
+    <property name="currentIndex">
+     <number>0</number>
     </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Ашан</string>
+     </attribute>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>1041</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonZN">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>150</y>
+        <width>201</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Знаковые товары</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="file_frov">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>50</y>
+        <width>831</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Не выгружено</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="file_zn_2">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>180</y>
+        <width>831</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Не выгружено</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="file_frov_3">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>110</y>
+        <width>831</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Не выгружено</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonTz">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>151</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Перейти к папке с ТЗ</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="file_frov_2">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>80</y>
+        <width>831</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Не выгружено</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="file_zn_3">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>210</y>
+        <width>831</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Не выгружено</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="file_zn">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>150</y>
+        <width>831</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Не выгружено</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonfFor_import">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>10</y>
+        <width>181</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Перейти к папке с файлами</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonFrov">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>201</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Frov</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Метро</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>Магнит</string>
+     </attribute>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -33,7 +191,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>153</width>
+     <width>1077</width>
      <height>26</height>
     </rect>
    </property>
