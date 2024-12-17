@@ -11,7 +11,7 @@ class Auchan_zn():
     def file_zn(self):
 
         self.settings = {
-                'zn.xlsx' : {
+                'zn' : {
                     'sheet_name' : 'ЗНАКОВЫЕ ТОВАРЫ_НГ',
                     'columns' : {
                                 'NEED': 'Название артикула',
@@ -28,9 +28,9 @@ class Auchan_zn():
                         'Конкурент': "Pyaterochka Gur'evskij 17"
                     },
                     'column' : 'Артикул МГБ',
-                    'mess' : 'Файл с потребностями "Знаковые товары" сформирован. Количество SKU к поиску в каждой ТТ - '
+                    'save': {'to_excel': '.xlsx'}
                 },
-                'Анкета в заявку.xlsx' : {
+                'Анкета в заявку' : {
                     'sheet_name' : 'ЗНАКОВЫЕ ТОВАРЫ_НГ',
                     'columns' : {
                                 'Название артикула': 'ART_NAME',
@@ -57,7 +57,8 @@ class Auchan_zn():
                      
 
                     },
-                    'column' : 'BARCODE'
+                    'column' : 'BARCODE',
+                    'save': {'to_csv': '.csv', 'to_excel': '.xlsx'}
                 },
         }
 
@@ -115,14 +116,19 @@ class Auchan_zn():
         df = pd.DataFrame()  
 
         for [key, val] in self.settings.items():
-            file_path = f'C:/Project/Auchan/{key}'
-            if os.path.exists(file_path):
-                os.remove(file_path)
-            else:
-                df = self.file_formation(val, key)
-                df[val['column']] = df[val['column']].astype('string')
-                df.to_excel(f'C:/Project/Auchan/for_import/{key}', index =False)
-        print(self.mess)
+            # print(glob.glob(f'{key}.*'))
+            file_path = glob.glob(f'C:/Project/Auchan/for_import/{key}.*')
+            # file_path = glob.glob(f'C:/Project/Auchan/for_import/Анкета в заявку.*')
+
+            if file_path:
+                for i in file_path:
+                    if os.path.exists(i):
+                        os.remove(i)
+            
+            df = self.file_formation(val, key)
+            df[val['column']] = df[val['column']].astype('string')
+            for [key_save, val_save] in val['save'].items():
+                getattr(df, key_save)(f'C:/Project/Auchan/for_import/{key}{val_save}', index =False)
         return self.mess
 
 
@@ -130,7 +136,7 @@ class Auchan_zn():
         file = pd.read_excel(glob.glob('C:/Project/Auchan/tz/ТЗ_*')[0], sheet_name = settings_file['sheet_name'], header = 0)
         file.rename(columns=settings_file['columns'], inplace=True)
         file = self.new_column(file, settings_file['add'], filename)
-
+        
         return file
     
     def new_column(self, filepd, add, filename):
@@ -151,9 +157,11 @@ class Auchan_zn():
                     filepd[x] = ''
             else:
                 filepd[key] = val
-        if (filename == 'zn.xlsx'):
+        self.mess = [] # Заполняем информацию для отображения в приложении об анкете в заявку
+        if (filename == 'zn'):
             filepd = filepd[self.re].drop_duplicates()
-        if (filename == 'Анкета в заявку.xlsx'):
+            print(f'Количество товаров в файле zn - {filepd.shape[0]}')
+        if (filename == 'Анкета в заявку'):
             filepd = self.apFile(filepd)
             filepd = filepd[self.applicationForm].drop_duplicates()
             
@@ -166,7 +174,8 @@ class Auchan_zn():
         return newdict
     
     def apFile(self, df):
-        self.mess = []
+        
+        
 
         file = pd.read_excel(glob.glob('C:/Project/Auchan/tz/АП_*')[0], sheet_name = 'Конкуренты_виды мониторинга', header = 0)
         file = file[file['ЗНАКОВЫЕ ТОВАРЫ'] == 'ЗНАКОВЫЕ ТОВАРЫ']
@@ -179,6 +188,6 @@ class Auchan_zn():
                           f'Количество товаров - {df.shape[0]}',
                           f'Файл с потребностями "Анкета в заявку" сформирован. Количество SKU к поиску в каждой ТТ - {dffile.shape[0]}'
                         ])
-       
+        
         return dffile
         

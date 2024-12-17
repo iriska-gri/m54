@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>10</y>
+      <y>0</y>
       <width>1071</width>
       <height>681</height>
      </rect>
@@ -173,16 +173,107 @@
        <string>Frov</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_timetableAuchan">
+      <property name="geometry">
+       <rect>
+        <x>940</x>
+        <y>10</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>График Ашана</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
       <string>Метро</string>
      </attribute>
+     <widget class="QPushButton" name="pushButton_timetableMetro">
+      <property name="geometry">
+       <rect>
+        <x>940</x>
+        <y>10</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>График Метро</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_diskRegular">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>10</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Диск Regular</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_diskAdditional">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>10</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Диск Additional</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_5">
      <attribute name="title">
       <string>Магнит</string>
      </attribute>
+     <widget class="QPushButton" name="pushButton_timetableMagnit">
+      <property name="geometry">
+       <rect>
+        <x>940</x>
+        <y>10</y>
+        <width>121</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>График Магнит</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_timetableSemishagoff">
+      <property name="geometry">
+       <rect>
+        <x>790</x>
+        <y>10</y>
+        <width>151</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>График Семишагофф</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_timetableParsers">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>10</y>
+        <width>151</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>График Парсеров</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

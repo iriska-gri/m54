@@ -6,6 +6,7 @@ from project.auchan import auchan_zn
 from project.auchan.auchan_frov import Auchan_frov
 from project.auchan.auchan_zn import Auchan_zn
 import os
+import webbrowser  # Модуль для открытия ссылок
 
 # Приложению нужен один (и только один) экземпляр QApplication.
 # Передаём sys.argv, чтобы разрешить аргументы командной строки для приложения.
@@ -21,16 +22,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowTitle("Контроль обработки файлов")
         self.pushButtonTz.clicked.connect(lambda: self.open_folder(r'C:\Project\Auchan\tz'))
         self.pushButtonfFor_import.clicked.connect(lambda: self.open_folder(r'C:\Project\Auchan\for_import'))
-        # self.setFixedSize(QSize(400, 300))
-        # button = QPushButton("Press Me!")
-
-        # # Set the central widget of the Window.
-        # self.setCentralWidget(button)
-        # button.setCheckable(True)
-        # button.clicked.connect(self.the_button_was_clicked)
-
-        # # Set the central widget of the Window.
-        # self.setCentralWidget(button)
+        self.pushButton_timetableAuchan.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1QXFnls8bVv3HElpnRMe_ZGJ6r7XBMaWTai6iihxTwto/edit?pli=1&gid=368938107#gid=368938107"))
+        self.pushButton_timetableMetro.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1LOU86hUB7ug-y2SKX8eTuXlGuPYy89SMH6ogHFgDFeA/edit?gid=1699846861#gid=1699846861"))
+        self.pushButton_diskRegular.clicked.connect(lambda: webbrowser.open("https://metro-my.sharepoint.com/personal/darya_demina_metro-cc_ru/_layouts/15/onedrive.aspx?ga=1&id=%2Fpersonal%2Fdarya%5Fdemina%5Fmetro%2Dcc%5Fru%2FDocuments%2FMA%26Metro%2FFood%2FQuestionnaires%2FRegular%2F2024"))
+        self.pushButton_diskAdditional.clicked.connect(lambda: webbrowser.open("https://metro-my.sharepoint.com/personal/darya_demina_metro-cc_ru/_layouts/15/onedrive.aspx?ga=1&id=%2Fpersonal%2Fdarya%5Fdemina%5Fmetro%2Dcc%5Fru%2FDocuments%2FMA%26Metro%2FFood%2FQuestionnaires%2FAdditional%2F2024"))
+        self.pushButton_timetableSemishagoff.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1vljvqy1fBs6CxelZ9kCG10teQLd9srzPVAyodXgz838/edit?gid=1867200013#gid=1867200013"))
+        self.pushButton_timetableMagnit.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1b8qWS0IUElJv2v3N2-X6t3WYdG2EgwL_omeWHVY0vvA/edit?gid=1046779328#gid=1046779328"))
+        self.pushButton_timetableParsers.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/14l_CX55DyV_jEALoNktn4Y8Fqb3seQ-jSA4NVLJh5eQ/edit?gid=0#gid=0"))
 
     def the_button_was_clicked_FROV(self):
         auchanFrov = Auchan_frov()
@@ -56,7 +54,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             print(f"Путь не найден: {folder_path}")
      
-
+    # def open_google_table(self, path):
+    #     # URL на Google Таблицу
+    #     url = 
+    #       # Открываем ссылку в браузере
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
