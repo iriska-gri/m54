@@ -1,11 +1,11 @@
 
-from project.auchan.auchan_frov import Auchan_frov
-from project.auchan.auchan_zn import Auchan_zn
+
+from project.auchan.auchan_tasks import Tasks
 import sys
 
 
 if __name__ == '__main__':
 
-   f = Auchan_zn()
+   f = Tasks()
 
    getattr(f ,sys.argv[1])()

@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import glob
 from google.oauth2.service_account import Credentials
-import gspread
 
 class Auchan_frov(): 
     def __init__(self):
@@ -143,19 +142,6 @@ class Auchan_frov():
 
         filepd = filepd[self.re].drop_duplicates()
         return filepd  
-    
-    # def googletable(self):
-    #     way = gspread.oauth()
-    #     needed_sheet = way.open_by_url('https://docs.google.com/spreadsheets/d/1ZZQMx1IXqaKdaU1YfnfG54Imxr04il3ot_ArE3GE-Ec/edit?gid=0#gid=0')
-            
-    #     sh = needed_sheet.worksheet("реестр(актуальный)")
-
-    #     # создаем датафрейм из справочника TT
-    #     data = sh.get_all_values()
-    #     headers = data.pop(0)
-    #     dict_tt = pd.DataFrame(data, columns=headers)
-    #     print(dict_tt)
-
       
     def wsiterator(self, setting):
         newdict = { 'Название города' : 'Moscow',

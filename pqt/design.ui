@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1077</width>
+    <width>1097</width>
     <height>737</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1071</width>
+      <width>1091</width>
       <height>681</height>
      </rect>
     </property>
@@ -35,7 +35,7 @@
        <rect>
         <x>10</x>
         <y>130</y>
-        <width>1041</width>
+        <width>1061</width>
         <height>16</height>
        </rect>
       </property>
@@ -186,6 +186,88 @@
        <string>График Ашана</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="lineEdit_wave_auchan">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>250</y>
+        <width>241</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>1061</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_tasks_auchan">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>250</y>
+        <width>201</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сгенерировать задание</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_week_auchan">
+      <property name="geometry">
+       <rect>
+        <x>1000</x>
+        <y>250</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_info_auchan">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>260</y>
+        <width>321</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Введите номер недели чтобы получить список волн</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget_auchan">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>290</y>
+        <width>401</width>
+        <height>121</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_week_ok_auchan">
+      <property name="geometry">
+       <rect>
+        <x>1050</x>
+        <y>250</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>OK</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -271,7 +353,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>График Парсеров</string>
+       <string>График Парсингов</string>
       </property>
      </widget>
     </widget>
@@ -282,7 +364,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1077</width>
+     <width>1097</width>
      <height>26</height>
     </rect>
    </property>

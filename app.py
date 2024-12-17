@@ -1,10 +1,11 @@
 import sys
 from pqt.design import Ui_MainWindow
 from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget
-from project.auchan import auchan_zn
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QTableWidgetItem
 from project.auchan.auchan_frov import Auchan_frov
 from project.auchan.auchan_zn import Auchan_zn
+from project.auchan.auchan_tasks import Tasks
+# from project.auchan.AP_file import Tasks
 import os
 import webbrowser  # Модуль для открытия ссылок
 
@@ -17,6 +18,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.get_info_wave_auchan()
         self.pushButtonFrov.clicked.connect(self.the_button_was_clicked_FROV)
         self.pushButtonZN.clicked.connect(self.the_button_was_clicked_ZN)
         self.setWindowTitle("Контроль обработки файлов")
@@ -29,6 +31,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pushButton_timetableSemishagoff.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1vljvqy1fBs6CxelZ9kCG10teQLd9srzPVAyodXgz838/edit?gid=1867200013#gid=1867200013"))
         self.pushButton_timetableMagnit.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1b8qWS0IUElJv2v3N2-X6t3WYdG2EgwL_omeWHVY0vvA/edit?gid=1046779328#gid=1046779328"))
         self.pushButton_timetableParsers.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/14l_CX55DyV_jEALoNktn4Y8Fqb3seQ-jSA4NVLJh5eQ/edit?gid=0#gid=0"))
+        self.pushButton_tasks_auchan.clicked.connect(self.the_button_was_task_auchan)
+        self.pushButton_week_ok_auchan.clicked.connect(self.get_info_wave_auchan)
+
 
     def the_button_was_clicked_FROV(self):
         auchanFrov = Auchan_frov()
@@ -54,10 +59,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             print(f"Путь не найден: {folder_path}")
      
-    # def open_google_table(self, path):
-    #     # URL на Google Таблицу
-    #     url = 
-    #       # Открываем ссылку в браузере
+    def the_button_was_task_auchan(self):
+        task = Tasks()
+        input_text_wave = self.lineEdit_wave_auchan.text()
+        task.filter_for_wave(input_text_wave)
+          
+        # self.label_all_wave_auchan.setText(str(j))
+
+    def get_info_wave_auchan(self):
+        task = Tasks()
+        number_week = self.lineEdit_week_auchan.text()
+        info_wave = task.filter_for_week(number_week) 
+        self.tableWidget_auchan.setRowCount(len(info_wave))
+        self.tableWidget_auchan.setColumnCount(len(info_wave[0]))
+        for i in range(len(info_wave)):
+            for j in range(len(info_wave[0])):
+                self.tableWidget_auchan.setItem(i, j, QTableWidgetItem(str(info_wave[i][j])))
+        self.tableWidget_auchan.resizeColumnsToContents()
+        self.tableWidget_auchan.horizontalHeader().setStretchLastSection(True)
+        print(info_wave, len(info_wave), len(info_wave[0]))
+        
+
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
