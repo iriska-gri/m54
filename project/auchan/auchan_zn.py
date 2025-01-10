@@ -45,8 +45,6 @@ class Auchan_zn():
                         'CITY': 'MOSCOW',
                         'TYPE': 'KVI',
                         'CONTRACTOR_NAME': 'MA',
-                      
-                   
                         'PRODUCT_NAME_CONTR': '',
                         'PRODUCT WEIGHT_CONTR': '',
                         'MANUF_CONTR': '',

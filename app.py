@@ -61,25 +61,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
      
     def the_button_was_task_auchan(self):
         task = Tasks()
+        input_tt = self.lineEdit__idTT_aushan.text()
         input_text_wave = self.lineEdit_wave_auchan.text()
-        task.filter_for_wave(input_text_wave)
-          
+        task.filter_for_wave(input_tt, input_text_wave)
+        # task.filter_for_wave(input_text_wave)  
         # self.label_all_wave_auchan.setText(str(j))
 
     def get_info_wave_auchan(self):
         task = Tasks()
         number_week = self.lineEdit_week_auchan.text()
         info_wave = task.filter_for_week(number_week) 
-        self.tableWidget_auchan.setRowCount(len(info_wave))
-        self.tableWidget_auchan.setColumnCount(len(info_wave[0]))
-        for i in range(len(info_wave)):
-            for j in range(len(info_wave[0])):
-                self.tableWidget_auchan.setItem(i, j, QTableWidgetItem(str(info_wave[i][j])))
-        self.tableWidget_auchan.resizeColumnsToContents()
-        self.tableWidget_auchan.horizontalHeader().setStretchLastSection(True)
-        print(info_wave, len(info_wave), len(info_wave[0]))
-        
-
+        # self.tableWidget_auchan.setRowCount(len(info_wave))
+        # self.tableWidget_auchan.setColumnCount(len(info_wave[0]))
+        # for i in range(len(info_wave)):
+        #     for j in range(len(info_wave[0])):
+        #         self.tableWidget_auchan.setItem(i, j, QTableWidgetItem(str(info_wave[i][j])))
+        # self.tableWidget_auchan.resizeColumnsToContents()
+        # self.tableWidget_auchan.horizontalHeader().setStretchLastSection(True)      
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
