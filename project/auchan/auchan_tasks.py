@@ -19,7 +19,7 @@ class Tasks():
         headers = data.pop(0)
         return pd.DataFrame(data, columns=headers)
 
-    def filter_for_wave(self, id_tt, input_text_wave):
+    def filter_for_wave(self, id_tt, input_text_wave, radio):
     # def filter_for_wave(self, input_text_wave):
         if os.path.exists(f'C:/Project/Auchan/for_import/task_{input_text_wave}.xlsx'):
             os.remove(f'C:/Project/Auchan/for_import/task_{input_text_wave}.xlsx')
@@ -27,7 +27,8 @@ class Tasks():
         df_data = pd.DataFrame(data, columns=["geo_object_id"])
         df = self.open_forming_auchan()
         df = df[df["Волна"]==input_text_wave]
-        # print(df)
+        first = df.iloc[0]
+       
         # print(df['Дата начала сбора'].iloc[0])
         # df.to_excel(f'C:/Project/Auchan/for_import/task.xlsx', index =False)
         file = pd.read_excel(glob.glob('C:/Project/Auchan/task/*')[0], sheet_name = 'Tasks', header = 0)
@@ -43,7 +44,13 @@ class Tasks():
 
         # Преобразование строки в datetime
         df['Дата начала сбора'] = pd.to_datetime(df['Дата начала сбора'], format='%d.%m.%Y')
-        dffile['subgroup1'] = f"KVI. ЗС УТРО, выгрузка отчетов строго до 12:30 ({ df['Дата начала сбора'].iloc[0].strftime('%d.%m')})"
+        first['Дата начала сбора'] = pd.to_datetime(first['Дата начала сбора'], format='%d.%m.%Y')
+        first['Дата окончания сбора'] = pd.to_datetime(first['Дата окончания сбора'], format='%d.%m.%Y')
+        
+        if radio == 'FROV':
+            dffile['subgroup1'] = f"KVI. ЗС УТРО, выгрузка отчетов строго до 12:30 ({ df['Дата начала сбора'].iloc[0].strftime('%d.%m')})"
+        if radio == 'samdesch':
+            dffile['subgroup1'] = f"А21: ЗС СамДеш. Сбор ({first['Дата начала сбора'].strftime('%d.%m')} - {first['Дата окончания сбора'].strftime('%d.%m')})"
         dffile = dffile.rename(columns={'geo_object_id_x': 'geo_object_id'})
         dffile = dffile[['project_id',
                         'title',
@@ -69,6 +76,7 @@ class Tasks():
                         'task_stop_date'
                         ]].drop_duplicates()
         dffile.to_excel(f'C:/Project/Auchan/for_import/task_{input_text_wave}.xlsx', index =False)
+        print('Задания сформированы')
         
         # print(dffile)
 

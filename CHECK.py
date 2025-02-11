@@ -18,7 +18,7 @@ def check_Metro():
     Check_sheet = gc.open_by_url('https://docs.google.com/spreadsheets/d/1bVX088YYqKJ73aF8pyroiDC9PaFFvrX8mJQmrqzQmYg/edit#gid=567406995')
     gr = gc.open_by_url('https://docs.google.com/spreadsheets/d/1LOU86hUB7ug-y2SKX8eTuXlGuPYy89SMH6ogHFgDFeA/edit?pli=1#gid=2094227955')
     
-    sh = gr.worksheet("График М54 2024")
+    sh = gr.worksheet("График М54 2025")
     check_sh = Check_sheet.worksheet("Метро")
 
     # создаем датафрейм из графика
@@ -505,22 +505,25 @@ def check_Magnit():
     Check_sheet = gc.open_by_url('https://docs.google.com/spreadsheets/d/1bVX088YYqKJ73aF8pyroiDC9PaFFvrX8mJQmrqzQmYg/edit#gid=567406995')
     gr = gc.open_by_url('https://docs.google.com/spreadsheets/d/1b8qWS0IUElJv2v3N2-X6t3WYdG2EgwL_omeWHVY0vvA/edit#gid=0')
     
-    sh = gr.worksheet("График 2024")
+    sh = gr.worksheet("График 2025")
     check_sh = Check_sheet.worksheet("Магнит")
-
+    
     # создаем датафрейм из графика
     data = sh.get_all_values()
+   
     headers = data.pop(0)
     df = pd.DataFrame(data, columns=headers)
-    df.rename(columns = {'Нед':'Неделя'}, inplace = True)
-    final_df = df.loc[lambda df: df.Неделя == week, :][["Неделя","Волна","ID проекта","Дата начала сбора","Дата окончания сбора"]]
     
+    df.rename(columns = {'Нед':'Неделя'}, inplace = True)
+    df.rename(columns = {'Проект':'ID проекта'}, inplace = True)
+    final_df = df.loc[lambda df: df.Неделя == week, :][["Неделя","Волна","ID проекта","Дата начала сбора","Дата окончания сбора"]]
+    print(final_df)
     final_df["Неделя"] = pd.to_numeric(final_df["Неделя"])
     final_df["ID проекта"] = pd.to_numeric(final_df["ID проекта"])
-
+    
     # создаем список волн из графика по указанному номеру недели
     waves_to_check = final_df.loc[lambda df: df.Неделя == int(week), :]["Волна"].values.tolist()  
-
+    
     # формируем список волн для запроса
     rqst =[]
     rqst=str(waves_to_check).replace('"', '').replace(']', '').replace('[', '')

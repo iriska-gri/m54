@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>20</y>
       <width>1091</width>
       <height>681</height>
      </rect>
@@ -222,52 +222,6 @@
        <string>Сгенерировать задание</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_week_auchan">
-      <property name="geometry">
-       <rect>
-        <x>1000</x>
-        <y>250</y>
-        <width>41</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_info_auchan">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>260</y>
-        <width>321</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Введите номер недели чтобы получить список волн</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidget_auchan">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>290</y>
-        <width>401</width>
-        <height>121</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_week_ok_auchan">
-      <property name="geometry">
-       <rect>
-        <x>1050</x>
-        <y>250</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>OK</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="pushButton_open_fileAP">
       <property name="geometry">
        <rect>
@@ -315,6 +269,38 @@
       </property>
       <property name="text">
        <string>Введите название волны</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_frov">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>260</y>
+        <width>95</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>FROV</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_samdesch">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>260</y>
+        <width>95</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Самдеш</string>
       </property>
      </widget>
     </widget>

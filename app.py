@@ -1,7 +1,7 @@
 import sys
 from pqt.design import Ui_MainWindow
 from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QTableWidgetItem
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QTableWidgetItem, QMessageBox
 from project.auchan.auchan_frov import Auchan_frov
 from project.auchan.auchan_zn import Auchan_zn
 from project.auchan.auchan_tasks import Tasks
@@ -32,8 +32,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pushButton_timetableMagnit.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1b8qWS0IUElJv2v3N2-X6t3WYdG2EgwL_omeWHVY0vvA/edit?gid=1046779328#gid=1046779328"))
         self.pushButton_timetableParsers.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/14l_CX55DyV_jEALoNktn4Y8Fqb3seQ-jSA4NVLJh5eQ/edit?gid=0#gid=0"))
         self.pushButton_tasks_auchan.clicked.connect(self.the_button_was_task_auchan)
-        self.pushButton_week_ok_auchan.clicked.connect(self.get_info_wave_auchan)
+        # self.radioButton_frov = self.findChild(QPushButton, 'radioButton_frov')
 
+
+        # self.radioButton_frov.clicked.connect(self.check_frov_status)
+
+    # def check_frov_status(self):
+    #     if self.radioButton_frov.isEnabled():
+    #         print("Кнопка FROV включена")
+    #     else:
+    #         print("Кнопка FROV выключена")
 
     def the_button_was_clicked_FROV(self):
         auchanFrov = Auchan_frov()
@@ -63,14 +71,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         task = Tasks()
         input_tt = self.lineEdit__idTT_aushan.text()
         input_text_wave = self.lineEdit_wave_auchan.text()
-        task.filter_for_wave(input_tt, input_text_wave)
+          # Проверяем, какая радиокнопка выбрана
+        if self.radioButton_frov.isChecked():
+            selected_option = "FROV"
+        elif self.radioButton_samdesch.isChecked():
+            selected_option = "samdesch"
+        else:
+            QMessageBox.warning(self, "Ошибка", "Не выбрана ни одна из опций!")
+            return
+        task.filter_for_wave(input_tt, input_text_wave, selected_option)
+        
         # task.filter_for_wave(input_text_wave)  
-        # self.label_all_wave_auchan.setText(str(j))
+ 
 
     def get_info_wave_auchan(self):
         task = Tasks()
-        number_week = self.lineEdit_week_auchan.text()
-        info_wave = task.filter_for_week(number_week) 
+        # number_week = self.lineEdit_week_auchan.text()
+        # info_wave = task.filter_for_week(number_week) 
         # self.tableWidget_auchan.setRowCount(len(info_wave))
         # self.tableWidget_auchan.setColumnCount(len(info_wave[0]))
         # for i in range(len(info_wave)):
