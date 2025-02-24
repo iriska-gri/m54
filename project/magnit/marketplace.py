@@ -67,7 +67,9 @@ class Marketplace():
             'promo_price':'Цена акционная за 1 единицу товара',
             'site_url': 'Ссылка',
             'screenshot_url': 'Ссылка на фото карточки товара',
-            'created_at': 'Дата парсинга'
+            'created_at': 'Дата парсинга',
+            'card_price':'Цена по карте'
+
         })
         file = pd.read_excel(f'C:/Project/Magnit/marketplace/file/{val["file"]}', sheet_name = 'Report', header = 0)
         file = file[['Маркетплейс', 'Идентификатор ТП', 'Код ТП', 'Наименование ТП из карточки товара', 'ГР20', 'ГР21', 'ГР22','ГР23']]
@@ -80,7 +82,7 @@ class Marketplace():
         result = result[[
             'Маркетплейс', 'Идентификатор ТП', 'Код ТП', 'Наименование ТП из карточки товара', 'ГР20', 'ГР21', 'ГР22','ГР23', 'Наименование КНК',	
             'кол-во шт. в уп',	
-            'Цена регулярная за 1 единицу товара',	'Цена акционная за 1 единицу товара',	'Ссылка',	'Ссылка на фото карточки товара',	'Дата парсинга'
+            'Цена регулярная за 1 единицу товара',	'Цена акционная за 1 единицу товара', 'Цена по карте',	'Ссылка',	'Ссылка на фото карточки товара',	'Дата парсинга'
         ]]
         # result.to_excel(f'C:/Project/Magnit/marketplace/for_import/{file_name}.xlsx', sheet_name='Report', index =False)
         result.to_excel(f'C:/Project/Magnit/marketplace/for_import/MIP_Report_for_Magnit_{today.year}_{today.isocalendar()[1]}_{file_name}_{tomorrow.strftime("%d.%m")}.xlsx', sheet_name='Report', index =False)

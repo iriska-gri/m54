@@ -248,7 +248,7 @@ def check_Aushan():
     sql7 = f"""select t.wave as "Волна"
     from ma_metro.tasks t where t.wave in ({rqst}) and t.project_id = 2 and t.title not like 'Перепроход:%'"""
 
-    # #Запрос на простановку филда в волнах из списка по 1 анкете
+    #Запрос на простановку филда в волнах из списка по 1 анкете
     sql8 = f"""select distinct t.wave as "Волна", case when t.custom_fields ->> 'manager' is not null then 'Проставлен' else 'Пусто' end as "Филд"
     from ma_metro.tasks t where t.wave in ({rqst}) and t.project_id = 1 and t.title not like 'Перепроход:%'"""    
     
@@ -314,7 +314,6 @@ def check_Aushan():
     final_df = final_df.merge(blueprint, how="left")
     final_df = final_df.merge(clientreq, how="left")
     final_df = final_df.merge(fild, how="left")
-    final_df.to_excel(f'C:/Project/Auchan/ss.xlsx', index =False)
     try:
         final_df = final_df.merge(template, how="left")
     except:
