@@ -46,23 +46,31 @@ report_path = os.path.join(base_dir, "outh", str(path_report[0]), str(path_repor
 report_files= [entry.name for entry in os.scandir(report_path) if entry.is_file()]
 
 for val in marketplaces:
+    pattern_path = fr"pattern_{val}"
+    pattern_report = fr"_{path_report[1]}_{val}_"
 
-    pattern = fr"_{path_report[1]}_{val}_"
-
-
-    # Находим нужный файл
-    matching_files = [f for f in report_files if re.search(pattern, f)]
-    print(matching_files, pattern)
+    # Находим все файлы шаблона с 27777 товарками
+    pattern_matching_files = [f for f in pattern_files if re.search(pattern_path, f)]
+    print(pattern_matching_files,  pattern_path, ' --------------------------------------------------------------')
+    # Находим нужный файл прошлых отчетов
+    matching_files = [f for f in report_files if re.search(pattern_report, f)]
+    print(matching_files, pattern_report)
 
     if matching_files:
-        file_path = os.path.join(report_path, matching_files[0])
-        df = pd.read_excel(file_path)  # Открываем файл
+        file_path_report = os.path.join(report_path, matching_files[0])
+        df_report = pd.read_excel(file_path_report)  # Открываем файл
     #     print(f"Открыт файл: {matching_files[0]}")
-        print(df)
+        # print(df_report)
     else:
         print("Файл не найден!")
 
-
+    if pattern_matching_files:
+        file_path_pattern = os.path.join(folders[0], pattern_matching_files[0])    
+        df_pattern = pd.read_excel(file_path_pattern)  # Открываем файл
+    #     print(f"Открыт файл: {matching_files[0]}")
+        print(df_pattern)
+    else:
+        print("Файл не найден!")
 # print(report_path)
 # # 
 
