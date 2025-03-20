@@ -11,7 +11,7 @@ def check_Metro():
             'https://www.googleapis.com/auth/spreadsheets',
             'https://www.googleapis.com/auth/drive'
     ]
-    # credentials = Credentials.from_service_account_file(
+    # credentials = Credentials.from_service_account_file(0
     #         'C:/vitg-306909-31021d096578.json',
     #         scopes=scopes)
     gc = gspread.oauth()

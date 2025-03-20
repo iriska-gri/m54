@@ -32,16 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pushButton_timetableMagnit.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/1b8qWS0IUElJv2v3N2-X6t3WYdG2EgwL_omeWHVY0vvA/edit?gid=1046779328#gid=1046779328"))
         self.pushButton_timetableParsers.clicked.connect(lambda: webbrowser.open("https://docs.google.com/spreadsheets/d/14l_CX55DyV_jEALoNktn4Y8Fqb3seQ-jSA4NVLJh5eQ/edit?gid=0#gid=0"))
         self.pushButton_tasks_auchan.clicked.connect(self.the_button_was_task_auchan)
-        # self.radioButton_frov = self.findChild(QPushButton, 'radioButton_frov')
-
-
-        # self.radioButton_frov.clicked.connect(self.check_frov_status)
-
-    # def check_frov_status(self):
-    #     if self.radioButton_frov.isEnabled():
-    #         print("Кнопка FROV включена")
-    #     else:
-    #         print("Кнопка FROV выключена")
+   
 
     def the_button_was_clicked_FROV(self):
         auchanFrov = Auchan_frov()
@@ -60,6 +51,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def open_folder(self, path):
         # Укажите путь к папке
         folder_path = path
+
+
         if os.path.exists(folder_path) and os.path.isdir(folder_path):
             # Windows
             if os.name == "nt":

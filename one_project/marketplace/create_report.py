@@ -5,7 +5,7 @@ import numpy as np
 import re
 from datetime import datetime, timedelta
 
-current_week = [2025, 8]
+current_week = [2025, 12]
 
 base_dir = "C:\\Project\\Magnit\\marketplace"  # Базовая директория
 
@@ -15,6 +15,7 @@ outh_base = os.path.join(base_dir, "outh", str(current_week[0]), str(current_wee
 
 # Пути для "raw" и "report"
 folders = [
+    base_dir,
     os.path.join(base_dir, "in"), 
     os.path.join(outh_base, "raw"), 
     os.path.join(outh_base, "report")
@@ -47,18 +48,15 @@ report_path = os.path.join(base_dir, "outh", str(path_report[0]), str(path_repor
 report_files= [entry.name for entry in os.scandir(report_path) if entry.is_file()]
 
 
-
-
-
 # Устанавливаем соединение с базой данных
 def connect_base(market_val, df_pattern, df_report): 
-    try:
+    # try:
         conn = psycopg2.connect(dbname='pm', user='psqlreader',
                             password='aImf3fivls34', host='localhost', port=8089)
         print('\nСоединение установлено')
         connect(conn, market_val, df_pattern, df_report)
-    except:
-        print('\nСоединение недоступно. Проверьте туннель к серверу')
+    # except:
+    #     print('\nСоединение недоступно. Проверьте туннель к серверу')
         
  
 
@@ -69,6 +67,7 @@ def connect(conn, market, df_pattern, df_report):
         r.custom_fields ->> 'competitor' competitor,
         r.custom_fields ->> 'ext_id' ext_id,
         coalesce(r.sku_title, r.custom_fields ->> 'name') sku_title,
+        r.custom_fields ->> 'units' units,
         r.metro_price metro_price,
         r.promo_price promo_price,
         r.card_price card_price,
@@ -104,6 +103,14 @@ def connect(conn, market, df_pattern, df_report):
       
         # Замена значения в столбце 'ext_id' на NaN
         new_raw_data['promo_price'] = new_raw_data['promo_price'].replace(0, np.nan)
+                # Преобразуем в datetime
+        today = datetime.today()  
+        monday_this_week = today - timedelta(days=today.weekday())  # Получаем понедельник      
+        new_raw_data['created_at'] = pd.to_datetime(new_raw_data['created_at'])
+
+        # Заменяем дату на понедельник текущей недели, сохраняя время
+        new_raw_data['created_at'] = new_raw_data['created_at'].apply(lambda dt: monday_this_week.replace(hour=dt.hour, minute=dt.minute, second=dt.second))
+
 
         remove_if_exists(file_raw)
         remove_if_exists(file_new_raw)
@@ -114,11 +121,12 @@ def connect(conn, market, df_pattern, df_report):
         new_raw_data.to_excel(file_new_raw, index=False)
         print(f'Сохранено: {file_new_raw} ----------- {new_raw_data.shape[0]} строк')
 
-        today = datetime.today()
+        
         tomorrow = today + timedelta(days=1)
         print(f'MIP_Report_for_Magnit_{today.year}_{today.isocalendar()[1]}_{market}_{tomorrow.strftime("%d.%m")} - {new_raw_data.shape[0]}_raw')
         new_raw_data = new_raw_data.rename(columns={
             'sku_title': 'Наименование КНК',
+            'units': '(база) кол-во шт. в уп',
             'metro_price': 'Цена регулярная за 1 единицу товара',
             'promo_price':'Цена акционная за 1 единицу товара',
             'site_url': 'Ссылка',
@@ -152,9 +160,10 @@ def connect(conn, market, df_pattern, df_report):
         # print(result, '2???????????????????????????')
         result = result[[
             'Маркетплейс', 'Идентификатор ТП', 'Код ТП', 'Наименование ТП из карточки товара', 'ГР20', 'ГР21', 'ГР22','ГР23', 'Наименование КНК',	
-            'кол-во шт. в уп',	
+            'кол-во шт. в уп',	'(база) кол-во шт. в уп',
             'Цена регулярная за 1 единицу товара',	'Цена акционная за 1 единицу товара', 'Цена по карте',	'Ссылка',	'Ссылка на фото карточки товара',	'Дата парсинга'
         ]]
+
         # print(market)
         # print(result, '-----------------???????????????????????????----------')
         # print(market)
