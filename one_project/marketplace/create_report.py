@@ -5,7 +5,7 @@ import numpy as np
 import re
 from datetime import datetime, timedelta
 
-current_week = [2025, 12]
+current_week = [2025, 14]
 
 base_dir = "C:\\Project\\Magnit\\marketplace"  # Базовая директория
 
@@ -15,7 +15,7 @@ outh_base = os.path.join(base_dir, "outh", str(current_week[0]), str(current_wee
 
 # Пути для "raw" и "report"
 folders = [
-    base_dir,
+    # base_dir,
     os.path.join(base_dir, "in"), 
     os.path.join(outh_base, "raw"), 
     os.path.join(outh_base, "report")
@@ -42,7 +42,8 @@ pattern = r"_([^_]+(?:_[^_]+)?).xls"
 
 # Извлечение названий
 marketplaces = [re.search(pattern, file).group(1) for file in pattern_files if re.search(pattern, file)]
-
+print(marketplaces)
+# marketplaces = ['ozon', 'megamarket', 'wildberries', 'yandex_market']
 # Получить все файлы из папки
 report_path = os.path.join(base_dir, "outh", str(path_report[0]), str(path_report[1]), 'report')
 report_files= [entry.name for entry in os.scandir(report_path) if entry.is_file()]
@@ -50,6 +51,7 @@ report_files= [entry.name for entry in os.scandir(report_path) if entry.is_file(
 
 # Устанавливаем соединение с базой данных
 def connect_base(market_val, df_pattern, df_report): 
+        print('1111111')
     # try:
         conn = psycopg2.connect(dbname='pm', user='psqlreader',
                             password='aImf3fivls34', host='localhost', port=8089)
@@ -187,6 +189,7 @@ def remove_if_exists(file_path):
 for val in marketplaces:
     pattern_path = fr"pattern_{val}"
     pattern_report = fr"_{path_report[1]}_{val}_"
+    print(report_path, '!')
 
     # Находим все файлы шаблона с 27777 товарками
     pattern_matching_files = [f for f in pattern_files if re.search(pattern_path, f)]
@@ -203,7 +206,7 @@ for val in marketplaces:
      
     else:
         print("Файл не найден!")
-
+    
     if pattern_matching_files:
         file_path_pattern = os.path.join(folders[0], pattern_matching_files[0])    
         df_pattern = pd.read_excel(file_path_pattern)  # Открываем файл

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1097</width>
-    <height>737</height>
+    <width>1080</width>
+    <height>557</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,13 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>20</y>
+      <y>0</y>
       <width>1091</width>
       <height>681</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -95,19 +95,6 @@
        <string>Не выгружено</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButtonTz">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>151</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Перейти к папке с ТЗ</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="file_frov_2">
       <property name="geometry">
        <rect>
@@ -145,19 +132,6 @@
       </property>
       <property name="text">
        <string>Не выгружено</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonfFor_import">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>10</y>
-        <width>181</width>
-        <height>28</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Перейти к папке с файлами</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButtonFrov">
@@ -303,6 +277,19 @@
        <string>Самдеш</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_create_folder_auchan">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>921</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Создать директорию</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -321,7 +308,7 @@
        <string>График Метро</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_diskRegular">
+     <widget class="QPushButton" name="pushButton_satam54Metro">
       <property name="geometry">
        <rect>
         <x>820</x>
@@ -331,20 +318,66 @@
        </rect>
       </property>
       <property name="text">
-       <string>Диск Regular</string>
+       <string>M54 поля</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_diskAdditional">
+     <widget class="QPushButton" name="pushButton_create_folder_metro">
       <property name="geometry">
        <rect>
-        <x>700</x>
+        <x>10</x>
         <y>10</y>
-        <width>121</width>
+        <width>681</width>
         <height>28</height>
        </rect>
       </property>
       <property name="text">
-       <string>Диск Additional</string>
+       <string>Создать директорию</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_tasks_metro">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>50</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сгенерировать задание</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_week_metro">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>50</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_year_metro">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_fild_metro">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>291</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сгенерировать файл с филдами</string>
       </property>
      </widget>
     </widget>
@@ -399,7 +432,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1097</width>
+     <width>1080</width>
      <height>26</height>
     </rect>
    </property>

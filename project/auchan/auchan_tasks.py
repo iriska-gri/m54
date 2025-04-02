@@ -21,16 +21,16 @@ class Tasks():
 
     def filter_for_wave(self, id_tt, input_text_wave, radio):
     # def filter_for_wave(self, input_text_wave):
-        if os.path.exists(f'C:/Project/Auchan/for_import/task_{input_text_wave}.xlsx'):
-            os.remove(f'C:/Project/Auchan/for_import/task_{input_text_wave}.xlsx')
+
         data = [int(x) for x in id_tt.split()]
         df_data = pd.DataFrame(data, columns=["geo_object_id"])
         df = self.open_forming_auchan()
         df = df[df["Волна"]==input_text_wave]
+
         first = df.iloc[0]
        
         # print(df['Дата начала сбора'].iloc[0])
-        # df.to_excel(f'C:/Project/Auchan/for_import/task.xlsx', index =False)
+        # df.to_excel(f'C:/Project/Auchan/outh/task.xlsx', index =False)
         file = pd.read_excel(glob.glob('C:/Project/Auchan/task/*')[0], sheet_name = 'Tasks', header = 0)
         df_data['key1'] = 0
         file['key1'] = 0
@@ -75,7 +75,12 @@ class Tasks():
                         'task_start_date',
                         'task_stop_date'
                         ]].drop_duplicates()
-        dffile.to_excel(f'C:/Project/Auchan/for_import/task_{input_text_wave}.xlsx', index =False)
+        base_dir = r"C:/Project/Auchan/outh/"  # Базовая директория
+        outh_base = os.path.join(base_dir, str(first['Год']), str(first['Нед']))
+        self.create_folder_week(base_dir, first['Год'], first['Нед'])
+        if os.path.exists(f'{outh_base}/task_{input_text_wave}.xlsx'):
+            os.remove(f'{outh_base}/task_{input_text_wave}.xlsx')
+        dffile.to_excel(f'{outh_base}/task_{input_text_wave}.xlsx', index =False)
         print('Задания сформированы')
         
         # print(dffile)
@@ -91,3 +96,24 @@ class Tasks():
             df = df[df["Нед"]==str(week_number)]
         df = df[['Волна', 'Наименование мониторинга']]
         return df.values.tolist()
+    
+    def create_folder_week(self, get_base_dir, year, week):
+ 
+        
+
+        # Основная папка для outh
+        outh_base = os.path.join(get_base_dir, str(year), str(week))
+
+
+        # Пути для "raw" и "report"
+        folders = [
+            outh_base
+        ]
+
+        # Создание папок
+        for folder in folders:
+            if not os.path.exists(folder):
+                os.makedirs(folder, exist_ok=True)
+                print(f"Создана папка: {folder}")
+            else:
+                print(f"Папка '{folder}' уже существует.")  

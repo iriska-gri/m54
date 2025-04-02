@@ -101,7 +101,7 @@ class Auchan_frov():
             else:
                
                 df = pd.concat([df, self.file_formation(key, val)]) 
-                df.to_excel(f'C:/Project/Auchan/for_import/{key}', index =False)
+                df.to_excel(f'C:/Project/Auchan/products/{key}', index =False)
                 quantily = len(df[df['Название корзины'] == val['add']['Название корзины']])
                 mass_quantily.append(f'{val["mess"]} {quantily}')
         print("Формирование файлов завершена")

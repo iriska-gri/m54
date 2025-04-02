@@ -115,8 +115,8 @@ class Auchan_zn():
 
         for [key, val] in self.settings.items():
             # print(glob.glob(f'{key}.*'))
-            file_path = glob.glob(f'C:/Project/Auchan/for_import/{key}.*')
-            # file_path = glob.glob(f'C:/Project/Auchan/for_import/Анкета в заявку.*')
+            file_path = glob.glob(f'C:/Project/Auchan/products/{key}.*')
+            # file_path = glob.glob(f'C:/Project/Auchan/products/Анкета в заявку.*')
 
             if file_path:
                 for i in file_path:
@@ -126,7 +126,7 @@ class Auchan_zn():
             df = self.file_formation(val, key)
             df[val['column']] = df[val['column']].astype('string')
             for [key_save, val_save] in val['save'].items():
-                getattr(df, key_save)(f'C:/Project/Auchan/for_import/{key}{val_save}', index =False)
+                getattr(df, key_save)(f'C:/Project/Auchan/products/{key}{val_save}', index =False)
         return self.mess
 
 
